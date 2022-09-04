@@ -112,8 +112,6 @@ function App() {
     function handleCardLike(card) {
         const token = localStorage.getItem('token')
         const isLiked = card.likes.some(i => i === currentUser._id);
-        console.log(isLiked);
-        console.log(card._id);
         api
             .changeLikeCardStatus(card._id, isLiked, token)
             .then((newCard) => {
@@ -202,15 +200,12 @@ function App() {
 
     function exit() {   
         localStorage.removeItem('token')
-        console.log(localStorage.getItem('token'));
-        console.log("exit");
         setLoggedIn(false)
         setUserAuth({})
         setCards([])
         setCurrentUser({})
     }
-    console.log(currentUser);
-    console.log(cards);
+    
     return (
         <CurrentUserContext.Provider value={currentUser}>
         <div className="page">
