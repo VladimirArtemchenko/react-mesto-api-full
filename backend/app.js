@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const { requestLogger, errorLogger } = require('./middlewares/logger');
+
 const { PORT = 3000 } = process.env;
 const options = {
   origin: [
@@ -29,6 +29,7 @@ const routerCard = require('./routes/cards');
 const auth = require('./middlewares/auth');
 const { isValid } = require('./isvalid/isvalid');
 const NotFoundError = require('./errors/not-found-error');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const {
   createUser,
@@ -87,7 +88,7 @@ app.use(routerCard);
 app.use((req, res, next) => {
   next(new NotFoundError('Ресурс не найден'));
 });
-app.use(errorLogger)
+app.use(errorLogger);
 app.use(errors());
 
 app.use((err, req, res, next) => {
